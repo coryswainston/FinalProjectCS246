@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SurveyMode" />
+        <activity android:name=".CalendarMode" />
+        <activity android:name=".ListMode" />
+        <activity android:name=".JournalMode"></activity>
     </application>
 
 </manifest>

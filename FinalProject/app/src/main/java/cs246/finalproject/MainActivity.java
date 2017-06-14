@@ -3,6 +3,7 @@ package cs246.finalproject;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         //this is a change
     }
 
-    public boolean openSurvey(){
+    public boolean openSurvey(View view){
         Intent intent = new Intent(this, SurveyMode.class);
         try {
             startActivity(intent);
