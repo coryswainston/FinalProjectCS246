@@ -19,7 +19,8 @@
         <activity android:name=".SurveyMode" />
         <activity android:name=".CalendarMode" />
         <activity android:name=".ListMode" />
-        <activity android:name=".JournalMode"></activity>
+        <activity android:name=".JournalMode" />
+        <activity android:name=".SettingsMode"></activity>
     </application>
 
 </manifest>

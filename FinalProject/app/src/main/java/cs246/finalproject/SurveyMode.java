@@ -23,7 +23,7 @@ public class SurveyMode extends AppCompatActivity {
     }
 
     void onSubmit(View view){
-
+        
     }
 
     void onBack(View view){
