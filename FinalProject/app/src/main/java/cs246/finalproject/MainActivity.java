@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +22,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         preferences = getSharedPreferences(USER_INFO, 0);
+        Log.i("MainActivity", "Got shared preferences");
         String username = preferences.getString(USERNAME, null);
+        Log.i("MainActivity", "Got username");
         if(username == null){
             Intent intent = new Intent(this, SettingsMode.class);
             startActivity(intent);
