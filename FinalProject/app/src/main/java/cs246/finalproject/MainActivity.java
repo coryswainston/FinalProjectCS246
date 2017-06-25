@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean openSurvey(View view){
         Intent intent = new Intent(this, SurveyMode.class);
+        intent.putExtra(USERNAME, name);
         try {
             startActivity(intent);
         } catch (Exception e) {

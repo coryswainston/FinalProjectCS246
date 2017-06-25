@@ -1,5 +1,6 @@
 package cs246.finalproject;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Calendar;
  */
 
 public class Entry {
-    private Calendar date;
+    private String timestamp;
     private String journalText;
     private int rating;
 
@@ -19,13 +20,17 @@ public class Entry {
      * Constructors
      */
     public Entry() {
-        date = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar c = Calendar.getInstance();
+        timestamp = df.format(c.getTime());
         journalText = "";
         rating = 0;
     }
 
     public Entry(int rating, String text) {
-        date = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar c = Calendar.getInstance();
+        timestamp = df.format(c.getTime());
         journalText = text;
         this.rating = rating;
     }
@@ -33,8 +38,8 @@ public class Entry {
     /**
      * Getters and setters
      */
-    public Calendar getDate() {
-        return date;
+    public String getTimestamp() {
+        return timestamp;
     }
 
     public String getJournalText() {
@@ -45,8 +50,8 @@ public class Entry {
         return rating;
     }
 
-    public void setDate(Calendar date) {
-        this.date = date;
+    public void setDate(String timestamp) {
+        this.timestamp = timestamp;
     }
 
     public void setJournalText(String journalText) {
