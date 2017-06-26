@@ -11,6 +11,7 @@ import android.view.View;
  * MainActivity
  *
  * Pull dis bizness
+ * Don't tell me what to do
  */
 public class MainActivity extends AppCompatActivity {
 
