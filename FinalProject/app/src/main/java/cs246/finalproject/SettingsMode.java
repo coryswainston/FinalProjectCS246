@@ -9,6 +9,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * @author Schlottmann and Swainston
+ * @version 1.0
+ */
+
 public class SettingsMode extends AppCompatActivity {
 
     SharedPreferences preferences;

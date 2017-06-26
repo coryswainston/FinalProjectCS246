@@ -3,6 +3,11 @@ package cs246.finalproject;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+/**
+ * @author Schlottmann and Swainston
+ * @version 1.0
+ */
+
 public class CalendarMode extends AppCompatActivity {
 
     @Override

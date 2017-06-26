@@ -12,6 +12,9 @@ import android.view.View;
  *
  * Pull dis bizness
  * Don't tell me what to do
+ *
+ * @author Schlottmann and Swainston
+ * @version 1.0
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
 
     private String name;
 
+    /**
+     * Checking for a saved username. If there is no username we will create one.
+     * @param savedInstanceState It's another saved instance state. Maybe Alabama, possibly mississippi. One of those.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
