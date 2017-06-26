@@ -13,6 +13,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import junit.framework.Assert;
 
+/**
+ * @author Schlottmann and Swainston
+ * @version 1.0
+ */
 public class SurveyMode extends AppCompatActivity {
 
     public TextView rating;
@@ -20,6 +24,11 @@ public class SurveyMode extends AppCompatActivity {
     private Entry entry;
     private String username;
 
+    /**
+     * Find the seekbar.
+     * Set listener to update the box whenever the progress changes.
+     * @param savedInstanceState It's a saved instance state probably
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +60,10 @@ public class SurveyMode extends AppCompatActivity {
         });
     }
 
+    /**
+     * Sending entry to databse.
+     * @param view It's a view. A nice one. Overlooking the water. Cost a lot of money to get this view.
+     */
     void onSubmit(View view){
         // create an Entry object
         entry = new Entry(seekBar.getProgress(), "");
