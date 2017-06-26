@@ -7,6 +7,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+/**
+ * MainActivity
+ *
+ * Pull dis bizness
+ */
 public class MainActivity extends AppCompatActivity {
 
     SharedPreferences preferences;
