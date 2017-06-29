@@ -5,4 +5,7 @@
     <string name="submit">Submit</string>
     <string name="cancel">Cancel</string>
     <string name="username">Enter Name</string>
+    <string name="back_Button">Back</string>
+    <string name="delete_Button">Delete</string>
+    <string name="textBox">Insert text here</string>
 </resources>
