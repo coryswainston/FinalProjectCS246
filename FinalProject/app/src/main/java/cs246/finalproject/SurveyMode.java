@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -40,6 +41,8 @@ public class SurveyMode extends AppCompatActivity {
         // find our seekbar
         seekBar = (SeekBar)findViewById(R.id.seekBar);
         rating = (TextView)findViewById(R.id.rating);
+        rating.setText(String.valueOf(seekBar.getProgress()));
+
         // set a listener to update the box whenever the progress changes
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -61,7 +64,7 @@ public class SurveyMode extends AppCompatActivity {
     }
 
     /**
-     * Sending entry to databse.
+     * Sending entry to database.
      * @param view It's a view. A nice one. Overlooking the water. Cost a lot of money to get this view.
      */
     void onSubmit(View view){
@@ -78,6 +81,7 @@ public class SurveyMode extends AppCompatActivity {
 
         fbReference.setValue(entry);
         Log.d("SurveyMode:onSubmit", "set entry");
+        Toast.makeText(this, "Entry saved!", Toast.LENGTH_SHORT).show();
         finish();
     }
 

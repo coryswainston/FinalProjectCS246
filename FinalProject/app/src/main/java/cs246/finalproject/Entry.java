@@ -8,7 +8,6 @@ import java.util.Calendar;
  *
  * @author Cory Swainston
  * @version 1.0
- * @since 6/23/17
  */
 
 public class Entry {
@@ -17,7 +16,7 @@ public class Entry {
     private int rating;
 
     /**
-     * Constructors
+     * Default constructor
      */
     public Entry() {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -27,6 +26,12 @@ public class Entry {
         rating = 0;
     }
 
+    /**
+     * Non-default constructor with parameters, sets to current date
+     *
+     * @param rating The heartburn rating
+     * @param text   Journal text
+     */
     public Entry(int rating, String text) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Calendar c = Calendar.getInstance();

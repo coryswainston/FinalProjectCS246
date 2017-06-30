@@ -14,6 +14,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:hint="@string/back_Button"
+        android:onClick="onBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -28,6 +29,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:hint="@string/delete_Button"
+        android:onClick="onDelete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toRightOf="@+id/backButton"
@@ -42,24 +44,25 @@
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
         android:hint="@string/submit"
+        android:onClick="onSubmit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textBox"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintRight_toRightOf="parent" />
 
-    <TextView
+    <MultiAutoCompleteTextView
         android:id="@+id/textBox"
-        android:layout_width="347dp"
+        android:layout_width="351dp"
         android:layout_height="345dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="80dp"
+        android:gravity="top"
         android:hint="@string/textBox"
-        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintBottom_toTopOf="@+id/submitButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

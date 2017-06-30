@@ -78,8 +78,9 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean openJournal(){
+    public boolean openJournal(View view){
         Intent intent = new Intent(this, JournalMode.class);
+        intent.putExtra(USERNAME, name);
         try {
             startActivity(intent);
         } catch (Exception e) {
