@@ -8,4 +8,6 @@
     <string name="back_Button">Back</string>
     <string name="delete_Button">Delete</string>
     <string name="textBox">Insert text here</string>
+    <string name="journal_Button">Journal</string>
+    <string name="calendar_Button">Calendar</string>
 </resources>
