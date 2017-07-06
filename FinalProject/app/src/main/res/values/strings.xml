@@ -10,4 +10,5 @@
     <string name="textBox">Insert text here</string>
     <string name="journal_Button">Journal</string>
     <string name="calendar_Button">Calendar</string>
+    <string name="filterButton">Filter</string>
 </resources>
