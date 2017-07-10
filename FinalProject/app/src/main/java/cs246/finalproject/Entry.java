@@ -60,7 +60,9 @@ public class Entry {
     }
 
     public void setJournalText(String journalText) {
-        this.journalText = journalText;
+        if (journalText != null) {
+            this.journalText = journalText;
+        }
     }
 
     public void setRating(int rating) {

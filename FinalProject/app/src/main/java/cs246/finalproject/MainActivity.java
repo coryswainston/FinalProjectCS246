@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String USERNAME = "username";
     public static final String USER_INFO = "userInfo";
+    public static final String ACTIVITY_NAME = "activity_name";
 
     private String name;
 

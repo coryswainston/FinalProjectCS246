@@ -73,4 +73,17 @@
         tools:layout_editor_absoluteX="16dp"
         app:layout_constraintHorizontal_bias="0.529" />
 
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="addRating"
+        android:text="Add heartburn rating"
+        app:layout_constraintBottom_toTopOf="@+id/textBox"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

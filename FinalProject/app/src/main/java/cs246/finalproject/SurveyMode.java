@@ -25,6 +25,8 @@ public class SurveyMode extends AppCompatActivity {
     private Entry entry;
     private String username;
 
+    public static String EXTRA_RATING = "extra_rating";
+
     /**
      * Find the seekbar.
      * Set listener to update the box whenever the progress changes.
@@ -37,6 +39,8 @@ public class SurveyMode extends AppCompatActivity {
 
         Intent intent = getIntent();
         username = intent.getStringExtra(MainActivity.USERNAME);
+        entry = new Entry();
+        entry.setJournalText(intent.getStringExtra(JournalMode.EXTRA_JOURNAL));
 
         // find our seekbar
         seekBar = (SeekBar)findViewById(R.id.seekBar);
@@ -69,7 +73,7 @@ public class SurveyMode extends AppCompatActivity {
      */
     void onSubmit(View view){
         // create an Entry object
-        entry = new Entry(seekBar.getProgress(), "");
+        entry.setRating(seekBar.getProgress());
         Log.d("SurveyMode:onSubmit", "created entry");
 
         // get a database instance
@@ -82,10 +86,21 @@ public class SurveyMode extends AppCompatActivity {
         fbReference.setValue(entry);
         Log.d("SurveyMode:onSubmit", "set entry");
         Toast.makeText(this, "Entry saved!", Toast.LENGTH_SHORT).show();
-        finish();
+
+        Intent intent = new Intent(this, ListMode.class);
+        startActivity(intent);
     }
 
     void onBack(View view){
         finish();
+    }
+
+    void addJournal(View view){
+        Intent intent = new Intent(this, JournalMode.class);
+        intent.putExtra(EXTRA_RATING, seekBar.getProgress());
+        intent.putExtra(MainActivity.USERNAME, username);
+        intent.putExtra(MainActivity.ACTIVITY_NAME, "SurveyMode");
+
+        startActivity(intent);
     }
 }

@@ -24,6 +24,8 @@ public class JournalMode extends AppCompatActivity {
     private String username;
     private TextView textBox;
 
+    public static String EXTRA_JOURNAL = "extra_journal";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +33,8 @@ public class JournalMode extends AppCompatActivity {
 
         Intent intent = getIntent();
         username = intent.getStringExtra(MainActivity.USERNAME);
+        entry = new Entry();
+        entry.setRating(intent.getIntExtra(SurveyMode.EXTRA_RATING, -1));
 
         textBox = (MultiAutoCompleteTextView) findViewById(R.id.textBox);
     }
@@ -40,7 +44,7 @@ public class JournalMode extends AppCompatActivity {
      */
     void onSubmit(View view){
         String journal = textBox.getText().toString();
-        entry = new Entry(-1, journal);
+        entry.setJournalText(journal);
         Log.d("JournalMode", "Created entry");
 
         FirebaseDatabase fb = FirebaseDatabase.getInstance();
@@ -50,7 +54,9 @@ public class JournalMode extends AppCompatActivity {
 
         fbReference.setValue(entry);
         Toast.makeText(this, "Entry saved!", Toast.LENGTH_SHORT).show();
-        finish();
+
+        Intent intent = new Intent(this, ListMode.class);
+        startActivity(intent);
     }
 
     void onBack(View view){
@@ -58,18 +64,20 @@ public class JournalMode extends AppCompatActivity {
     }
 
     void onDelete(View view) {
-        if (entry == null) {
-            Log.d("JournalMode:onDelete", "entry is null");
-            Toast.makeText(this, "Entry is not created", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        Log.d("JournalMode:onDelete", "entry is not null");
-
         FirebaseDatabase fb = FirebaseDatabase.getInstance();
         DatabaseReference fbReference = fb.getReference(username);
         fbReference = fbReference.child(entry.getTimestamp());
         fbReference.removeValue();
         Toast.makeText(this, "Entry deleted", Toast.LENGTH_SHORT).show();
         finish();
+    }
+
+    void addRating(View view){
+        Intent intent = new Intent(this, SurveyMode.class);
+        intent.putExtra(MainActivity.ACTIVITY_NAME, "JournalMode");
+        intent.putExtra(EXTRA_JOURNAL, textBox.getText().toString());
+        intent.putExtra(MainActivity.USERNAME, username);
+
+        startActivity(intent);
     }
 }

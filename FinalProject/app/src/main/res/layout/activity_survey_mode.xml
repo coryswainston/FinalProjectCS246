@@ -21,7 +21,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.546">
+        app:layout_constraintVertical_bias="0.546"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
 
     </GridLayout>
 
@@ -70,7 +72,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="0dp"
         android:onClick="onSubmit"
         android:text="@string/submit"
         app:layout_constraintHorizontal_bias="0.208"
@@ -85,7 +86,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="-29dp"
         android:onClick="onBack"
         android:text="@string/cancel"
         app:layout_constraintLeft_toRightOf="@+id/submit"
@@ -93,5 +93,16 @@
         app:layout_constraintTop_toBottomOf="@+id/rating"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="60dp"
+        android:onClick="addJournal"
+        android:text="Add Journal Entry"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cancel" />
 
 </android.support.constraint.ConstraintLayout>
