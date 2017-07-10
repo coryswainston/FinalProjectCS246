@@ -79,6 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
+        android:background = "@drawable/round_button"
         android:onClick="addRating"
         android:text="Add heartburn rating"
         app:layout_constraintBottom_toTopOf="@+id/textBox"
