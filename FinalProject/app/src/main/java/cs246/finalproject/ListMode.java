@@ -25,8 +25,8 @@ import java.util.List;
 public class ListMode extends AppCompatActivity {
 
     private ListView listView;
-    private List<Entry> entries;
-    private ListAdapter adapter;
+    private ArrayList<Entry> entries;
+    private EntryAdapter adapter;
     private String username;
 
     @Override
@@ -70,7 +70,7 @@ public class ListMode extends AppCompatActivity {
             }
         });
 
-        adapter = new ArrayAdapter<Entry>(this, R.layout.support_simple_spinner_dropdown_item, entries);
+        adapter = new EntryAdapter(this, entries);
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
     }
