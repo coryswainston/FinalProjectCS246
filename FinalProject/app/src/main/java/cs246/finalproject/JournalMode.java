@@ -25,6 +25,7 @@ public class JournalMode extends AppCompatActivity {
     private TextView textBox;
 
     public static String EXTRA_JOURNAL = "extra_journal";
+    public static String EXTRA_TIMESTAMP = "extra_timestamp";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,12 @@ public class JournalMode extends AppCompatActivity {
         entry.setRating(intent.getIntExtra(SurveyMode.EXTRA_RATING, -1));
 
         textBox = (MultiAutoCompleteTextView) findViewById(R.id.textBox);
+
+        String journalExtra = intent.getStringExtra(EXTRA_JOURNAL);
+        if (journalExtra != null){
+            textBox.setText(journalExtra);
+            entry.setDate(intent.getStringExtra(EXTRA_TIMESTAMP));
+        }
     }
 
     /**

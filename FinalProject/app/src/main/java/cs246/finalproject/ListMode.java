@@ -1,9 +1,12 @@
 package cs246.finalproject;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -45,8 +48,11 @@ public class ListMode extends AppCompatActivity {
         ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                entries.add(dataSnapshot.getValue(Entry.class));
+                Entry entry = dataSnapshot.getValue(Entry.class);
+                entries.add(entry);
                 Log.d("ListMode", "added entry");
+                Log.d("ListMode", String.valueOf(entries.size()));
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -70,8 +76,24 @@ public class ListMode extends AppCompatActivity {
             }
         });
 
+        Log.i("ENTRIES SIZE", String.valueOf(entries.size()));
+
         adapter = new EntryAdapter(this, entries);
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Entry entry = (Entry) listView.getItemAtPosition(position);
+                Intent intent = new Intent(ListMode.this, JournalMode.class);
+                intent.putExtra(MainActivity.USERNAME, username);
+                intent.putExtra(JournalMode.EXTRA_JOURNAL, entry.getJournalText());
+                intent.putExtra(SurveyMode.EXTRA_RATING, entry.getRating());
+                intent.putExtra(JournalMode.EXTRA_TIMESTAMP, entry.getTimestamp());
+
+                startActivity(intent);
+            }
+        });
     }
 }
