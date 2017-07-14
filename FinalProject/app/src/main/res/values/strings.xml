@@ -11,4 +11,5 @@
     <string name="journal_Button">Journal</string>
     <string name="calendar_Button">Calendar</string>
     <string name="filterButton">Filter</string>
+    <string name="title">Title</string>
 </resources>
