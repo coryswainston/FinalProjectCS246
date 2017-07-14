@@ -15,6 +15,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import junit.framework.Assert;
 
 /**
+ * Rate heartburn on a scale of 0 - 10
+ *
  * @author Schlottmann and Swainston
  * @version 1.0
  */
@@ -30,6 +32,8 @@ public class SurveyMode extends AppCompatActivity {
     /**
      * Find the seekbar.
      * Set listener to update the box whenever the progress changes.
+     * Get any passed extras
+     *
      * @param savedInstanceState It's a saved instance state probably
      */
     @Override
@@ -37,6 +41,7 @@ public class SurveyMode extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey_mode);
 
+        // get intent to see if we're editing an existing entry
         Intent intent = getIntent();
         username = intent.getStringExtra(MainActivity.USERNAME);
         entry = new Entry();
@@ -73,7 +78,7 @@ public class SurveyMode extends AppCompatActivity {
     }
 
     /**
-     * Sending entry to database.
+     * Sending entry to database
      * @param view It's a view. A nice one. Overlooking the water. Cost a lot of money to get this view.
      */
     void onSubmit(View view){
@@ -88,10 +93,12 @@ public class SurveyMode extends AppCompatActivity {
         Log.d("SurveyMode:onSubmit", "got username reference");
         fbReference = fbReference.child(entry.getTimestamp());
 
+        // save the entry
         fbReference.setValue(entry);
         Log.d("SurveyMode:onSubmit", "set entry");
         Toast.makeText(this, "Entry saved!", Toast.LENGTH_SHORT).show();
 
+        // go to list mode
         Intent intent = new Intent(this, ListMode.class);
         startActivity(intent);
     }

@@ -9,17 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SurveyMode" />
+        <activity android:name=".SurveyMode" android:noHistory="true"/>
         <activity android:name=".CalendarMode" />
         <activity android:name=".ListMode" />
-        <activity android:name=".JournalMode" />
+        <activity android:name=".JournalMode" android:noHistory="true"/>
         <activity android:name=".SettingsMode"></activity>
     </application>
 

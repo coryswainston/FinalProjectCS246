@@ -13,7 +13,6 @@ import android.widget.Toast;
  * @author Schlottmann and Swainston
  * @version 1.0
  */
-
 public class SettingsMode extends AppCompatActivity {
 
     SharedPreferences preferences;
@@ -26,6 +25,10 @@ public class SettingsMode extends AppCompatActivity {
         preferences = getSharedPreferences(MainActivity.USER_INFO, 0);
     }
 
+    /**
+     * Saves the settings to Shared Preferences
+     * @param view submit button
+     */
     void onSubmit(View view){
         EditText editText = (EditText) findViewById(R.id.editText);
         String username = editText.getText().toString();

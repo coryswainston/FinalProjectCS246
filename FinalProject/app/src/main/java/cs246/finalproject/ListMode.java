@@ -40,18 +40,21 @@ public class ListMode extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_mode);
 
+        // get username from shared preferences
         SharedPreferences preferences = getSharedPreferences(MainActivity.USER_INFO, 0);
         username = preferences.getString(MainActivity.USERNAME, null);
 
+        // get any filter passed by the calendar
         filter = getIntent().getStringExtra(CalendarMode.CALENDAR_FILTER_EXTRA);
         if (filter == null){
             filter = "";
         }
         Log.d("ListMode", "Filter is: " + filter);
+
         // populate the listView
         entries = new ArrayList<>();
 
-        FirebaseDatabase fb = FirebaseDatabase.getInstance();
+        FirebaseDatabase fb = FirebaseDatabase.getInstance(); // get a database instance
         DatabaseReference ref = fb.getReference(username);
         ref.addChildEventListener(new ChildEventListener() {
             @Override
@@ -134,6 +137,7 @@ public class ListMode extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
+        // set the click listener for editing entries
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

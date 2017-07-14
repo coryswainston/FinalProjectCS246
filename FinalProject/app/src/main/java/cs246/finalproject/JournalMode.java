@@ -30,16 +30,23 @@ public class JournalMode extends AppCompatActivity {
     public static String EXTRA_TIMESTAMP = "extra_timestamp";
     public static String EXTRA_TITLE = "extra_title";
 
+    /**
+     * Gets any passed information and sets up the UI
+     *
+     * @param savedInstanceState a saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_journal_mode);
 
+        // get any passed info from intent
         Intent intent = getIntent();
         username = intent.getStringExtra(MainActivity.USERNAME);
         entry = new Entry();
         entry.setRating(intent.getIntExtra(SurveyMode.EXTRA_RATING, -1));
 
+        // get text boxes
         textBox = (MultiAutoCompleteTextView) findViewById(R.id.textBox);
         titleBox = (EditText) findViewById(R.id.title);
 
@@ -53,23 +60,28 @@ public class JournalMode extends AppCompatActivity {
     }
 
     /**
-     * submit the entry to the database
+     * Submit entry to the database
+     * @param view the submit button
      */
     void onSubmit(View view){
+        // populate the entry
         String journal = textBox.getText().toString();
         String title = titleBox.getText().toString();
         entry.setJournalText(journal);
         entry.setTitle(title);
         Log.d("JournalMode", "Created entry");
 
+        // get database reference
         FirebaseDatabase fb = FirebaseDatabase.getInstance();
         DatabaseReference fbReference = fb.getReference(username);
         fbReference = fbReference.child(entry.getTimestamp());
         Log.d("JournalMode", "got reference");
 
+        // save entry
         fbReference.setValue(entry);
         Toast.makeText(this, "Entry saved!", Toast.LENGTH_SHORT).show();
 
+        // go to ListMode
         Intent intent = new Intent(this, ListMode.class);
         startActivity(intent);
     }
@@ -78,7 +90,12 @@ public class JournalMode extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Deletes an entry
+     * @param view delete button
+     */
     void onDelete(View view) {
+        // get database reference and remove the value
         FirebaseDatabase fb = FirebaseDatabase.getInstance();
         DatabaseReference fbReference = fb.getReference(username);
         fbReference = fbReference.child(entry.getTimestamp());
@@ -88,13 +105,17 @@ public class JournalMode extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Add a rating to the journal entry
+     * @param view add rating button
+     */
     void addRating(View view){
         Intent intent = new Intent(this, SurveyMode.class);
         intent.putExtra(MainActivity.ACTIVITY_NAME, "JournalMode");
         intent.putExtra(EXTRA_JOURNAL, textBox.getText().toString());
         intent.putExtra(MainActivity.USERNAME, username);
-        intent.putExtra(JournalMode.EXTRA_TITLE, titleBox.getText().toString());
-        intent.putExtra(JournalMode.EXTRA_TIMESTAMP, entry.getTimestamp());
+        intent.putExtra(EXTRA_TITLE, titleBox.getText().toString());
+        intent.putExtra(EXTRA_TIMESTAMP, entry.getTimestamp());
 
         startActivity(intent);
     }
