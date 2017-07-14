@@ -40,7 +40,12 @@ public class SurveyMode extends AppCompatActivity {
         Intent intent = getIntent();
         username = intent.getStringExtra(MainActivity.USERNAME);
         entry = new Entry();
-        entry.setJournalText(intent.getStringExtra(JournalMode.EXTRA_JOURNAL));
+        String journalExtra = intent.getStringExtra(JournalMode.EXTRA_JOURNAL);
+        if (journalExtra != null){
+            entry.setJournalText(journalExtra);
+            entry.setTimestamp(intent.getStringExtra(JournalMode.EXTRA_TIMESTAMP));
+            entry.setTitle(intent.getStringExtra(JournalMode.EXTRA_TITLE));
+        }
 
         // find our seekbar
         seekBar = (SeekBar)findViewById(R.id.seekBar);
@@ -100,6 +105,7 @@ public class SurveyMode extends AppCompatActivity {
         intent.putExtra(EXTRA_RATING, seekBar.getProgress());
         intent.putExtra(MainActivity.USERNAME, username);
         intent.putExtra(MainActivity.ACTIVITY_NAME, "SurveyMode");
+
 
         startActivity(intent);
     }

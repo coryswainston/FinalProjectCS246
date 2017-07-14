@@ -10,9 +10,6 @@ import android.view.View;
 /**
  * MainActivity
  *
- * Pull dis bizness
- * Don't tell me what to do
- *
  * @author Schlottmann and Swainston
  * @version 1.0
  */
@@ -45,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         name = username;
-        setTitle(name);
+
+        openList();
     }
 
     public boolean openSurvey(View view){
