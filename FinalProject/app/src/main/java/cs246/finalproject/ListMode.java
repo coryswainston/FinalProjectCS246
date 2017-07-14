@@ -18,6 +18,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -31,6 +33,7 @@ public class ListMode extends AppCompatActivity {
     private ArrayList<Entry> entries;
     private EntryAdapter adapter;
     private String username;
+    private String filter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,11 @@ public class ListMode extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences(MainActivity.USER_INFO, 0);
         username = preferences.getString(MainActivity.USERNAME, null);
 
+        filter = getIntent().getStringExtra(CalendarMode.CALENDAR_FILTER_EXTRA);
+        if (filter == null){
+            filter = "";
+        }
+        Log.d("ListMode", "Filter is: " + filter);
         // populate the listView
         entries = new ArrayList<>();
 
@@ -48,21 +56,65 @@ public class ListMode extends AppCompatActivity {
         ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                // add an entry to the array
                 Entry entry = dataSnapshot.getValue(Entry.class);
                 entries.add(entry);
                 Log.d("ListMode", "added entry");
                 Log.d("ListMode", String.valueOf(entries.size()));
+
+                // sort from newest to oldest
+                //noinspection Since15
+                entries.sort(new Comparator<Entry>() {
+                    @Override
+                    public int compare(Entry o1, Entry o2) {
+                        long t1 = Long.parseLong(o1.getTimestamp());
+                        long t2 = Long.parseLong(o2.getTimestamp());
+                        if (t1 > t2){
+                            return -1;
+                        } else {
+                            return 1;
+                        }
+                    }
+                });
+
+                adapter.getFilter().filter(filter);
+
+                Log.d("ListMode", "Entries size: " + String.valueOf(entries.size()));
+                Log.d("Adapter", "Entries size: " + String.valueOf(adapter.getCount()));
                 adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                Entry entry = dataSnapshot.getValue(Entry.class);
+                for (Entry e : entries) {
+                    if (e.getTimestamp().equals(entry.getTimestamp())){
+                        e = entry;
+                    }
+                }
+                adapter.getFilter().filter(filter);
 
+                adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                entries.remove(dataSnapshot.getValue(Entry.class));
+                Log.d("childRemoved", String.valueOf(entries.size()));
+                Entry entry = dataSnapshot.getValue(Entry.class);
+                Iterator<Entry> i = entries.iterator();
+                while (i.hasNext()){
+                    Entry e = i.next();
+                    if (e.getTimestamp().equals(entry.getTimestamp())){
+                        i.remove();
+                        break;
+                    }
+                }
+
+                Log.d("childRemoved", String.valueOf(entries.size()));
+
+                adapter.getFilter().filter(filter);
+
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -86,14 +138,32 @@ public class ListMode extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Entry entry = (Entry) listView.getItemAtPosition(position);
+                Log.d("clickListener", entry.getTimestamp());
                 Intent intent = new Intent(ListMode.this, JournalMode.class);
                 intent.putExtra(MainActivity.USERNAME, username);
                 intent.putExtra(JournalMode.EXTRA_JOURNAL, entry.getJournalText());
+                intent.putExtra(JournalMode.EXTRA_TITLE, entry.getTitle());
                 intent.putExtra(SurveyMode.EXTRA_RATING, entry.getRating());
                 intent.putExtra(JournalMode.EXTRA_TIMESTAMP, entry.getTimestamp());
 
                 startActivity(intent);
             }
         });
+    }
+
+    void openCalendar(View view){
+        Intent intent = new Intent(this, CalendarMode.class);
+        startActivity(intent);
+    }
+
+    void openJournal(View view) {
+        Intent intent = new Intent(this, JournalMode.class);
+        intent.putExtra(MainActivity.USERNAME, username);
+        startActivity(intent);
+    }
+
+    void removeFilter(View view){
+        filter = "";
+        adapter.getFilter().filter(filter);
     }
 }
